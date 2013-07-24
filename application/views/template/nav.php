@@ -13,15 +13,12 @@
         <li><a href="<?php echo base_url('docu'); ?>">Documentation</a></li>
         <li class="divider-vertical"></li>
     </ul>
-    <div class="btn-group pull-right">
-        <a class="btn btn-orange dropdown-toggle" data-toggle="dropdown" href="#">
-            admin	<span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
-            <li class="divider"></li>
-            <li><a href="#"><i class="icon-share"></i> Logout</a></li>
-        </ul>
-    </div>
+
+
+    <form action="<?php echo base_url('login'); ?>" method="post" class="navbar-form pull-right">
+        <input type="text" name ="user_name" id="username" class="span2" value="danimoth2" placeholder="Your username">
+        <input type="password" name ="user_password" id="password" class="span2" value="daryll" placeholder="Your password">
+        <button type="submit" class="btn">User Login</button>
+    </form>
 </div>
 <!--/.nav-collapse -->

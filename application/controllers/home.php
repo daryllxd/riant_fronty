@@ -29,7 +29,7 @@ class Home extends MY_Controller {
 
         $this->title = "Riant Documentation";
         $this->keywords = "Web development software, documentation";
-        
+
 
         $this->_render('pages/docu', $renderData);
     }
@@ -42,6 +42,16 @@ class Home extends MY_Controller {
         $this->css = array('sign_up.css');
 
         $this->_render('pages/sign_up', $renderData);
+    }
+
+    public function logged_in($renderData = "") {
+
+
+        $this->title = "Sign up";
+        $this->keywords = "Web development software, documentation";
+        $this->css = array('sign_up.css');
+
+        $this->_render('pages/logged_in', $renderData);
     }
 
 }

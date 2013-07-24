@@ -42,6 +42,9 @@ $route['default_controller'] = "home";
 $route['404_override'] = '';
 $route['docu'] = 'home/docu';
 $route['sign_up'] = 'home/sign_up';
+$route['logged_in'] = 'home/logged_in';
+$route['new_user'] = 'user/add';
+$route['login'] = 'session/login';
 
 
 /* End of file routes.php */

@@ -1,0 +1,18 @@
+/* 
+    Document   : sign_up
+    Created on : Jul 24, 2013, 1:51:11 PM
+    Author     : Daryll Santos
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#main-profile-pic{
+    height: auto;
+    width: 140px;
+    
+}
+
+#command-center{
+    margin-top: 30px;
+}
+
