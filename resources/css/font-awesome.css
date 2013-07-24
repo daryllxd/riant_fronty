@@ -40,11 +40,11 @@
   -webkit-font-smoothing: antialiased;
 
   /* sprites.less reset */
-  display: inline;
+  /*display: inline;*/
   width: auto;
   height: auto;
   line-height: normal;
-  vertical-align: baseline;
+  vertical-align: bottom;
   background-image: none;
   background-position: 0% 0%;
   background-repeat: repeat;

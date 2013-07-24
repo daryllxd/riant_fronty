@@ -1,0 +1,21 @@
+/* 
+    Document   : home
+    Created on : Jul 24, 2013, 3:27:00 PM
+    Author     : Daryll Santos
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#riant-features img{    
+    display: block;
+    margin: 0 auto;
+}
+
+#riant-features{
+
+}
+

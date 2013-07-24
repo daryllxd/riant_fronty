@@ -12,9 +12,17 @@
 <meta name="keywords" content="<?php echo $keywords ?>" />
 <meta name="author" content="<?php echo $author ?>" />
 
-
+<!--
 <link rel="stylesheet" href="<?php echo base_url(CSS."style.css");?>">
-<link rel="stylesheet" href="<?php echo base_url(CSS."global.css");?>">
+<link rel="stylesheet" href="<?php echo base_url(CSS."global.css");?>">-->
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet/less" href="<?php echo base_url(CSS."bootstrap.less");?>">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--<link rel="stylesheet/less" href="less/responsive.less">-->
+    <link rel="stylesheet/less" href="<?php echo base_url(CSS."riant.less");?>">
+
+    <script src="<?php echo base_url(JS."less.js");?>"></script>
 
 <!-- extra CSS-->
 <?php foreach($css as $c):?>
@@ -34,6 +42,8 @@
 <link rel="apple-touch-icon" sizes="57x57" href="<?php echo base_url(IMAGES.'ico/apple-touch-icon-57x57-precompressed.png');?>">
 <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url(IMAGES.'ico/apple-touch-icon-72x72-precompressed.png');?>">
 <link rel="apple-touch-icon" sizes="114x114" href="<?php echo base_url(IMAGES.'ico/apple-touch-icon-114x114-precompressed.png');?>">
+
+
 
 </head>
 <body>

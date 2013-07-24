@@ -1,7 +1,10 @@
-<header id="header" class="navbar navbar-fixed-top">
+<header id="header" class="navbar navbar-inverse">
   <div class="navbar-inner">
-    <div class="container">
+    <div class="container-fluid">
      <?php echo $nav?>
-    </div>
-  </div>
-</header>
+            </div>
+            <!--/.container-fluid -->
+        </div>
+        <!--/.navbar-inner -->
+    </header>
+    <!--/.navbar -->

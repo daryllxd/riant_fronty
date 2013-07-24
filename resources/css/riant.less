@@ -1,0 +1,79 @@
+@import "bootstrap";
+
+.text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
+	text-shadow: @string;
+}
+
+.row{
+    margin-bottom: 20px;
+}
+
+#hero {
+    background-image:url('../img/back.jpg');
+    background-color: @black;
+    background-repeat:repeat-x;    
+    background-position:center;
+    margin-bottom: 30px;
+    min-height: 450px;
+    overflow: hidden;
+}
+
+#hero > * {
+    color: @riant-white;
+    padding-top: 30px;
+}
+
+h1, h2, .screenshot {
+    line-height: 1.2em;
+    margin: 0 0 0.7em 0;
+}
+
+#hero h2{
+    font-size: 20px;   
+    margin-top: 10px; 
+}
+
+#call-to-action{    
+    margin-top: 10px;
+    padding: 0 !important;
+    width: 100%;
+}
+
+.btn-orange{
+    color: @riant-white;
+    background-color: hsl(30, 76%, 16%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c5701a", endColorstr="#472809");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#c5701a), to(#472809));
+    background-image: -moz-linear-gradient(top, #c5701a, #472809);
+    background-image: -ms-linear-gradient(top, #c5701a, #472809);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c5701a), color-stop(100%, #472809));
+    background-image: -webkit-linear-gradient(top, #c5701a, #472809);
+    background-image: -o-linear-gradient(top, #c5701a, #472809);
+    background-image: linear-gradient(#c5701a, #472809);
+    border-color: #472809 #472809 hsl(30, 76%, 9%);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.46);
+    -webkit-font-smoothing: antialiased;
+}
+
+.team h2{
+    margin-bottom: 2px;
+}
+
+
+footer{
+    background-color: @riant-dark;
+    border-top: 2px solid @riant-white;
+}
+
+footer a:hover{
+    color: @riant-white;
+}
+
+footer ul li:first-child{
+    margin-top: 12px;
+}
+
+footer ul li{
+    line-height: 1.5em;
+}
