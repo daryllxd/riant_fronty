@@ -1,35 +1,29 @@
 
-<section id="sign-up-form" class="container">
+<section id="sign-in-error-form" class="container">
     <div class="row">
         <div class="span8">
-            <h1>Sign up for Riant</h1>                
+            <h1>Wrong username/password :(</h1>   
 
-            <form action="<?php echo base_url('new_user');?>" method="post" class="form-horizontal">                    
+<!--            <form action="<?php // echo base_url('login'); ?>" method="post" class="navbar-form pull-right">
+                <input type="text" name ="user_name" id="username" class="span2" value="" placeholder="Your username">
+                <input type="password" name ="user_password" id="password" class="span2" value="daryll" placeholder="Your password">
+                <button type="submit" class="btn">User Login</button>
+            </form>-->
+
+            <form action="<?php echo base_url('login'); ?>" method="post" class="form-horizontal">                    
 
                 <div class="control-group">
-                    <label class="control-label" for="username">Username</label>
+                    <label class="control-label" for="user_name">Username</label>
                     <div class="controls">
-                        <input type="text" name ="user_name" id="username" placeholder="Your username">
+                        <input type="text" name ="user_name" id="username" class="span2" value="" placeholder="Your username">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="email">Email</label>
+                    <label class="control-label" for="user_password">Password</label>
                     <div class="controls">
-                        <input type="email" name ="user_email" id="email" placeholder="Your Email">
+                        <input type="password" name ="user_password" id="password" class="span2" value="daryll" placeholder="Your password">
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="confirm_email">Confirm Email</label>
-                    <div class="controls">
-                        <input type="email" name ="confirm_email" id="confirm_email" placeholder="Re-enter Email">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="password">Password</label>
-                    <div class="controls">
-                        <input type="password" name ="user_password" id="password" placeholder="Your password">
-                    </div>
-                </div>
+                </div>                
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn">Sign in</button>

@@ -9,68 +9,41 @@ class Session extends MY_Controller {
         parent::__construct();
     }
 
+    public function get_current_user_and_projects($user_id = '') {
+        return $this->session_model->get_current_user_and_projects($user_id);
+    }
+
     public function login($user = '') {
 
         if (isset($user['user_name'])) {
-            $auth = $this->session_model->login($user);
+            $authentication_info = $this->session_model->login($user);
         } else {
-            $auth = $this->session_model->login($this->input->post());
+            $authentication_info = $this->session_model->login($this->input->post());
         }
 
-        if ($auth) {
+        if ($authentication_info) {
+//            login to command center
+            $this->session->set_userdata('user_id', $authentication_info['user_id']);
+            $this->session->set_userdata('user_name', $authentication_info['user_name']);
 
-            $this->session->set_userdata('id', $auth['user_id']);
-            $this->title = $auth['user_name'];
+            redirect(base_url('profile'));
+        } else {
+
+            $this->title = 'Riant - Wrong Username/password combo';
             $this->keywords = "Web development software, documentation";
-            $this->data = $auth;
-//                $this->css = array('sign_up.css');
-            $this->css = array('command_center.css');
+            $this->css = array('sign_in_error.css');
 
-            $this->_render('pages/command_center');
-            
-            
-            
-        } else {
-            
+            $this->_render('pages/sign_in_error');
         }
     }
 
-    public function test() {
-        $amp = ($this->session_model->login(array('user_name' => 'danimoth2', 'user_email' => 'daryll.santos@gmail.com', 'user_password' => 'daryll')));
+    public function logout($user = '') {
+        $this->session->unset_userdata('user_id');
 
-        echo var_dump($amp);
-
-        echo $amp['user_name'];
-    }
-
-    public function sign_up($renderData = "") {
-
-
-        $this->title = "Sign up";
-        $this->keywords = "Web development software, documentation";
-        $this->css = array('sign_up.css');
-
-        $this->_render('pages/sign_up', $renderData);
-    }
-
-    public function logged_in($renderData = "") {
-
-        echo var_dump($this->input->post());
-
-
-        $this->title = "Sign up";
-        $this->keywords = "Web development software, documentation";
-        $this->css = array('sign_up.css');
-
-        $this->_render('pages/logged_in', $renderData);
-    }
-
-    public function new_user($renderData = "") {
-        $this->load->model('user_model');
-        $user_id = $this->user_model->add($this->input->post());
-        $this->session->set_userdata('id', $user_id);
-
-        echo $this->session->userdata('id');
+        $this->title = "Yaaaaa";
+        $this->keywords = "arny, arnodo";
+        $this->css = array('home.css');
+        redirect(base_url(''));
     }
 
 }

@@ -16,7 +16,7 @@
 
 
     <form action="<?php echo base_url('login'); ?>" method="post" class="navbar-form pull-right">
-        <input type="text" name ="user_name" id="username" class="span2" value="danimoth2" placeholder="Your username">
+        <input type="text" name ="user_name" id="username" class="span2" value="<?php  if (isset($user_name)) echo $user_name; ?>" placeholder="Your username">
         <input type="password" name ="user_password" id="password" class="span2" value="daryll" placeholder="Your password">
         <button type="submit" class="btn">User Login</button>
     </form>

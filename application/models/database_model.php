@@ -21,7 +21,7 @@ class Database_model extends CI_Model {
     }
 
     public function construct_database() {
-        $this->dbforge->create_database('riant_fronty');
+        $this->dbforge->create_database(DATABASE_NAME);
         $this->load->database('test', TRUE);
 
         $this->create_users_table();
@@ -52,7 +52,7 @@ class Database_model extends CI_Model {
             'user_profile_picture' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '100',
-                'default' => 'riant'
+                'default' => 'logo.png'
             ),
             'stamp_created TIMESTAMP DEFAULT NOW()',
             'stamp_updated' => array(
@@ -119,6 +119,15 @@ class Database_model extends CI_Model {
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
+            'project_name' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100'
+            ),
+            'project_description' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '256',
+                'null' => TRUE
+            ),
             'user_id' => array(
                 'type' => 'INT',
                 'unsigned' => TRUE,
@@ -131,8 +140,8 @@ class Database_model extends CI_Model {
                 'constraint' => '100',
                 'null' => TRUE
             ),
-            'time_logged_in TIMESTAMP DEFAULT NOW()',
-            'time_logged_out' => array(
+            'time_created TIMESTAMP DEFAULT NOW()',
+            'time_updated' => array(
                 'type' => 'DATETIME',
                 'null' => TRUE
             )
@@ -146,21 +155,10 @@ class Database_model extends CI_Model {
             REFERENCES users(user_id)
             ');
     }
-
-//    public function destroy_database() {
-//        $this->load->database('test', TRUE);
-//
-//        $tables = $this->db->list_tables();
-//
-//        foreach ($tables as $table) {
-//            echo $table;
-//
-//            $fields = $this->db->list_fields($table);
-//
-//            echo implode(' ', $fields);
-//        }
-//        $this->dbforge->drop_database(DATABASE_NAME);
-//    }
+    
+    public function destroy_database() {       
+        $this->dbforge->drop_database(DATABASE_NAME);
+    }
 
 }
 

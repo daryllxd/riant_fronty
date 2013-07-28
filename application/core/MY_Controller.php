@@ -61,9 +61,18 @@ class MY_Controller extends CI_Controller {
 
                 //nav menu
                 if ($this->hasNav) {
-                    $this->load->helper("nav");
+//                    $this->load->helper("nav");
                     $toMenu["pageName"] = $this->pageName;
-                    $toHeader["nav"] = $this->load->view("template/nav", $toMenu, true);
+
+                    //check if logged in or not, if not display something else
+                    if ($this->session->userdata('user_id')) {
+                        $toMenu['user_name'] = $this->session->userdata('user_name');
+                        
+                        $toHeader["nav"] = $this->load->view("template/nav_logged_in", $toMenu, true);
+                        
+                    } else {
+                        $toHeader["nav"] = $this->load->view("template/nav_not_logged_in", $toMenu, true);
+                    }
                 }
                 $toHeader["basejs"] = $this->load->view("template/basejs", $this->data, true);
 

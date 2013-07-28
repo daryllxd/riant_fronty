@@ -6,13 +6,52 @@
         Purpose of the stylesheet follows.
 */
 
-#main-profile-pic{
+#current-profile #current-profile-username{
+    margin-bottom: 2px;    
+}
+
+#current-profile #main-profile-pic{
+    box-shadow: 0px 2px 1px #888;
     height: auto;
-    width: 140px;
-    
+    width: 140px;    
 }
 
 #command-center{
     margin-top: 30px;
 }
+
+#current-projects-header{
+    padding-bottom: 20px;
+}
+
+#current-projects-header h2{
+    display: inline;
+    padding-right: 15px;
+}
+
+
+
+#current-projects-header #add-project{
+    margin-bottom: 13px;
+}
+
+#current-projects-body{
+    overflow: hidden;
+}
+
+#current-projects-body th{
+    background-color: #403B33;
+    color: #EDEBE6;
+}
+
+#current-projects-body .project-name{
+    margin-bottom: 2px;
+}
+
+#modal-create-project .modal-title{
+    margin-bottom: 5px;
+}
+
+
+
 

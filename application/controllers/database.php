@@ -23,7 +23,14 @@ class Database extends MY_Controller {
     }
 
     public function index() {
-        $this->database_model->construct_database();
+        $this->load->dbutil();
+        if (!$this->dbutil->database_exists('riant_fronty')) {
+            $this->database_model->construct_database();
+            echo 'have db';
+        } else {
+            $this->database_model->destroy_database();
+            echo 'no db now';
+        }
     }
 
 }

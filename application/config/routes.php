@@ -45,6 +45,8 @@ $route['sign_up'] = 'home/sign_up';
 $route['logged_in'] = 'home/logged_in';
 $route['new_user'] = 'user/add';
 $route['login'] = 'session/login';
+$route['logout'] = 'session/logout';
+$route['profile'] = 'home/profile';
 
 
 /* End of file routes.php */

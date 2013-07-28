@@ -10,8 +10,6 @@ class Home extends MY_Controller {
         /*
          * set up title and keywords (if not the default in custom.php config file will be set) 
          */
-
-
         $this->title = "Yaaaaa";
         $this->keywords = "arny, arnodo";
         $this->css = array('home.css');
@@ -26,10 +24,8 @@ class Home extends MY_Controller {
 
     public function docu($renderData = "") {
 
-
         $this->title = "Riant Documentation";
         $this->keywords = "Web development software, documentation";
-
 
         $this->_render('pages/docu', $renderData);
     }
@@ -42,6 +38,19 @@ class Home extends MY_Controller {
         $this->css = array('sign_up.css');
 
         $this->_render('pages/sign_up', $renderData);
+    }
+
+    public function profile($renderData = "") {
+        $this->load->model('user_model');
+        $user_info = $this->user_model->get_current_user_and_projects($this->session->userdata('user_id'));
+
+        $this->title = $user_info['user_name'];
+        $this->keywords = "Web development software, documentation";
+        $this->data = $user_info;
+        $this->css = array('command_center.css');
+        $this->javascript = array('command_center.js');
+
+        $this->_render('pages/command_center');
     }
 
     public function logged_in($renderData = "") {

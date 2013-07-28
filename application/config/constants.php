@@ -47,6 +47,7 @@ define('IMAGES','resources/img/');
 define('JS','resources/js/');
 define('CSS','resources/css/');
 define('UPLOAD','resources/upload/');
+define('DATABASE_NAME', 'riant_fronty');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

@@ -1,13 +1,14 @@
 <?php
 
 /**
- * user_model
+ * project_model
  * 
+ * project_id
  * user_id
- * user_name
- * user_password
- * user_email
- * user_profile_picture
+ * project_privacy
+ * project_location
+ * time_created
+ * time_updated
  *  
  * @package		riant
  * @author		University of the East Research and Development Unit
@@ -55,18 +56,21 @@ class User_model extends MY_Model {
 
     }
 
-    public function add($user_to_add) {
+    public function add($project_to_add) {
 
-        $user_to_add = array(
-            'user_name' => $user_to_add['user_name'],
-            'user_password' => sha1($user_to_add['user_password']),
-            'user_email' => $user_to_add['user_email']
+        $project_to_add = array(
+            'user_name' => $project_to_add['user_name'],
+            'user_password' => sha1($project_to_add['user_password']),
+            'user_email' => $project_to_add['user_email']
         );
 
-        $this->db->insert('users', $user_to_add);
+        $this->db->insert('users', $project_to_add);
 
         return $this->db->insert_id();
     }
+    
+    
+    
 
     public function edit($user) {
         $this->db->trans_start();
