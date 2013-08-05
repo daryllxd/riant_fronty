@@ -40,7 +40,7 @@ class Home extends MY_Controller {
         $this->_render('pages/sign_up', $renderData);
     }
 
-    public function survey($renderData = "") {
+    public function survey() {
         if ($this->session->userdata('user_id')) {
             $this->load->model('question_model');
             $all_questions = $this->question_model->get();
@@ -55,6 +55,8 @@ class Home extends MY_Controller {
             redirect('home');
         }
     }
+    
+    
 
     public function test() {
         mkdir('tte');

@@ -1,11 +1,78 @@
 <section id="survey-form" class="container">
     <div class="row">
         <div class="span12">
-            <h1>Post-Usage Evaluation</h1>                
+            <h1>Post-Usage Evaluation</h1>
 
-            <form action="<?php echo base_url('survey'); ?>" method="post" class="form-inline">       
+            <p>Thank you for using our system. Your answers will be completely confidential.</p>
+
+
+
+            <form action="<?php echo base_url('submit_survey'); ?>" method="post" class="form-inline">
 
                 <table class="table">
+                    <tr>
+                        <td colspan="2"><strong>Hello.</strong></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            I am a...
+                        </td>
+                        <td class="choices">
+
+                            <label class="radio inline">
+                                <input type="radio" name="survey-profession" value="designer">
+                                Web designer
+                            </label>
+                            <label class="radio inline">
+                                <input type="radio" name="survey-profession" value="developer">
+                                Web developer
+                            </label>
+                            <label class="radio inline">
+                                <input type="radio" name="survey-profession" value="both">
+                                Both
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>I have been creating websites for...</td>
+                        <td class="choices">
+
+                            <div class="input-append">
+                                <input name="survey-years-experience" id="appendedInput" class="inline" type="number" value="1">
+                                <span class="add-on">years</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>When I develop web sites, I use a/an...</td>
+                        <td class="choices">
+
+                            <label class="checkbox inline">
+                                <input type="checkbox" name="survey-tools-used" id="optionsRadios1" value="text editor" checked>
+                                <a class="tooltipper" data-toggle="tooltip" title="Notepad++, Sublime Text, Vim, Emacs">Text Editors</a>
+                            </label>
+                            <label class="checkbox inline">
+                                <input type="checkbox" name="survey-tools-used" value="ide">
+                                <a class="tooltipper" data-toggle="tooltip" title="Eclipse, Netbeans, Visual Studio">IDEs</a>
+                            </label>
+                            <label class="checkbox inline">
+                                <input type="checkbox" name="survey-tools-used" value="wysiwyg">
+                                <a class="tooltipper" data-toggle="tooltip" title="Dreamweaver, Amaya">WYSIWYG</a>
+                            </label>
+                            <label class="checkbox inline">
+                                <input type="checkbox" name="survey-tools-used" value="website builder">
+                                <a class="tooltipper" data-toggle="tooltip" title="Weebly, Wix, Yola">Website Builders</a>
+                            </label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2"><strong>What were your experiences while using our software?</strong></td>
+                    </tr>
+
+
                     <?php
                     foreach ($questions as $resource) {
                         ?>
@@ -13,14 +80,13 @@
                             <td>
                                 <?php echo $resource['question_text']; ?>
                             </td>
-                            <td>
-                                <label class="radio">
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="yes">
+                            <td class="question choices">
+                                <label class="radio inline">
+                                    <input type="radio" name="survey-question-<?php echo $resource['question_id']; ?>" value="1" checked>
                                     Yes
                                 </label>
-                                <label class="radio">
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="no">
-                                    No
+                                <label class="radio inline">
+                                    <input type="radio" name="survey-question-<?php echo $resource['question_id']; ?>" value="0">No
                                 </label>
                             </td>
                         </tr>
@@ -28,11 +94,12 @@
                     }
                     ?>
 
+
                 </table>                
 
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn">Sign in</button>
+                        <a <?php // echo base_url('submit_survey'); ?>" id="submit-survey" class="btn">Submit</a>
                     </div>
                 </div>
             </form>
@@ -42,18 +109,3 @@
         </div>
     </div>
 </section>
-
-<!--
-<div class="container">A
-    <div class="row team">
-        <div class="span2">                
-            <h2>Thesis</h2>
-        </div>
-
-        <div class="span10">
-            <p>
-                The introduction of Web 2.0 moved the software development platform from the desktop to the browser(O'Reilly, 2005). Asynchronous JavaScript and XML (AJAX)led to the development of Rich Internet Applications (RIAs), or web applications that behave like desktop applications(Garrett, 2005). This movement was accompanied with an increase in both commercial and academic offerings for web-based code editors, which promise to make code generation and testing viable across different browsers and operating platforms.</p>
-            <p>The current web development tools range from theseweb-basedcode editors to What You See Is What You Get (WYSIWYG) website builders. WYSIWYG emphasizes dragging and dropping elements onto a web page.Both of these have their advantages, but compromise in either generating code or style. Web-basedcode editors lack the traditional drag-and-drop interface common to desktop code editors. WYSIWYG editors are extremely limited in their support for JavaScript and data storage. Software that combines both manual coding and WYSIWYG, such as Adobe Dreamweaver, often result in bloated and unreadable code.</p>
-        </div>                   
-    </div>
-</div>-->

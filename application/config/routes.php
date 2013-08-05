@@ -58,9 +58,8 @@ $route['logout'] = 'session/logout';
 
 $route['test'] = 'home/test';
 
-
-
 $route['new_user'] = 'user/add';
+$route['submit_survey'] = 'user/submit_survey';
 
 
 /* End of file routes.php */

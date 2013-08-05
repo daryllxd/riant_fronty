@@ -8,6 +8,8 @@
  * user_password
  * user_email
  * user_profile_picture
+ * user_has_finished_survey
+ * optional: user_profesion, user_years_experience, user_tools_used
  *  
  * @package		riant
  * @author		University of the East Research and Development Unit
@@ -93,6 +95,32 @@ class User_model extends MY_Model {
         $this->db->trans_complete();
 
         return $user['user_id'];
+    }
+
+    public function submit_survey($user) {
+        $to_insert = array();
+        
+        $user['question_answers'] = __::rest($user['question_answers']);
+
+        
+
+        foreach ($user['question_answers'] as $key => $value) {
+            $to_insert[] = array(
+                'user_id' => $user['user_id'],
+                'question_id' => $key + 1,
+                'question_answer' => $value
+            );
+        }
+
+
+        $this->db->trans_start();
+        
+        $this->db->insert_batch('users_questions', $to_insert);
+
+
+        $this->db->trans_complete();
+        
+        return $this->db->last_query();
     }
 
 }

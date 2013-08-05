@@ -6,6 +6,35 @@
         Purpose of the stylesheet follows.
 */
 
+
+
 #survey-form{
     margin-top: 30px;
 }
+
+.choices{
+    float: right;
+}
+
+.radio{
+    margin-left: 2em;
+}
+
+#appendedInput{
+    padding: 4px;
+    text-align: right;
+    width: 2em;
+}
+
+tr{
+    border-top: 1px solid #cad8b6;
+}
+
+.table td{
+    border-top: none;
+}
+
+.table td p{
+    margin-bottom: 0.2em;
+}
+
