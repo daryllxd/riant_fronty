@@ -7,11 +7,8 @@
 <div class="nav-collapse collapse">
     <ul class="nav">
         <li><a href="<?php echo base_url(''); ?>">Home</a></li>
-        <li class="divider-vertical"></li>
-        <li class="active"><a href="<?php echo base_url('sign_up'); ?>">Sign up</a></li>
-        <li class="divider-vertical"></li>
         <li><a href="<?php echo base_url('docu'); ?>">Documentation</a></li>
-        <li class="divider-vertical"></li>
+        <li><a href="<?php echo base_url('survey'); ?>">Post-Test Survey</a></li>
     </ul>
 
     <ul id="profile-dropdown" class="nav pull-right">

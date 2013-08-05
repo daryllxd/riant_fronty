@@ -40,3 +40,4 @@ nbproject
 node_modules
 dist
 /application/data/
+/resources/upload/

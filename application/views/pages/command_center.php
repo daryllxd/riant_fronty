@@ -10,44 +10,60 @@
         <div id="current-projects" class="span9 offset1">          
             <div id="current-projects-header">
                 <h2>Current Projects</h2>
-                <a href="#modal-create-project" id="add-project" class="btn">Add New Project</a>
+                <a href="#modal-create-project" class="btn add-project">Create a Project</a>
+
             </div>
 
-            <div id="current-projects-body">
+            <div id="alert-placeholder"></div>
 
-                <table class="table table-hover">                   
-                    <tbody>
+            <table id="current-projects-body" class="table table-hover">                   
+                <tbody>
+
+                    <?php if (count($resources) <= 0) { ?>
                         <tr>
                             <td>
-                                <h3 class="project-name"><a href="#">Riant</a></h3>
-                                <p class="project-description">Web Development Software (charos)</p>
+                                <h3 id="create-new-project-text" class="add-project">
+                                    <a href="#modal-create-project">You have no projects, create one now!</a>
+                                </h3>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <h3 class="project-name"><a href="#">Tagisan ng Talino</a></h3>
-                                <p class="project-description">GAMERS OF THE GAMERS</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h3 class="project-name"><a href="#">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</a></h3>
-                                <p class="project-description">Web Development Software (charos)</p>
-                            </td>
-                        </tr>
-                    </tbody>
+                        <?php
+                    } else {
+                        ?>
+
+                        <?php
+                        foreach ($resources as $resource) {
+                            ?>
+                            <tr id="project-cell-<?php echo $resource['project_id']; ?>">
+                                <td>
+                                    <h3 class="project-name"><a href="#"><?php echo $resource['project_name'] ?></a></h3>
+                                    <p class="project-description"><?php echo $resource['project_description'] ?></p>
+                                </td>
+                                <td>
+                                    <div class="project-options">
+                                        <a href="#modal-create-project" class="btn edit-project-<?php echo $resource['project_id'] ?>" >Edit</a>
+                                        <a href="#modal-create-project" class="btn download-project-<?php echo $resource['project_id'] ?>" >Download</a>
+                                        <a class="delete-project-<?php echo $resource['project_id'] ?> btn" data-project-name="<?php echo $resource['project_name'] ?>" data-project-id="<?php echo $resource['project_id'] ?>">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    ?>
 
 
-                    </thead>
 
-                </table>
-            </div>
+
+                </tbody>
+
+            </table>
         </div>
     </div>
 </div>
 
 <!-- Modal -->
-<div class="modal" id="modal-create-project">
+<div class="modal" id="modal-create-project" style="display:none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,21 +72,46 @@
             </div>
             <div class="modal-body">
                 <div class="control-group">
-                    <label class="control-label" for="project_name">Project Name</label>
+                    <label class="control-label" for="create-project-name">Project Name</label>
                     <div class="controls">
-                        <input type="email" name="project_name" id="project_name" placeholder="Limited to 40 characters :)">
+                        <input type="text" name="project_name" id="create-project-name" placeholder="Limited to 40 characters :)">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="project_description">Description</label>
+                    <label class="control-label" for="create-project-description">Description</label>
                     <div class="controls">
-                        <input type="password" name="project_description" id="project_description" placeholder="(Not required) What your project is all about.">
+                        <input type="text" name="project_description" id="create-project-description" placeholder="(Not required) What your project is all about.">
                     </div>
                 </div>
-                
+
                 <a href="#" id="create-project" class="btn">Let's do this!</a>
 
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal" id="modal-delete-project" style="display:none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title">Delete project</h2>
+            </div>
+            <div class="modal-body">
+
+                <p>Are you absolutely sure? You cannot undo this.</p>
+                <p><strong>If you really want to delete this project, then we strongly recommend that you download it first.</strong></p>
+                <div class="control-group">
+                    <label class="control-label" for="delete-project-name">To delete this project, type its name here:</label>
+
+                    <input type="text" name="delete-project-name" id="delete-project-name" class="" placeholder="Enter the name">
+                </div>
+                <a id="delete-project-button" class="btn btn-danger btn-large">Delete</a>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

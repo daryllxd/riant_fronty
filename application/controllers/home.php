@@ -40,27 +40,42 @@ class Home extends MY_Controller {
         $this->_render('pages/sign_up', $renderData);
     }
 
-    public function profile($renderData = "") {
-        $this->load->model('user_model');
-        $user_info = $this->user_model->get_current_user_and_projects($this->session->userdata('user_id'));
+    public function survey($renderData = "") {
+        if ($this->session->userdata('user_id')) {
+            $this->load->model('question_model');
+            $all_questions = $this->question_model->get();
+            $this->title = 'Post-test survey';
 
-        $this->title = $user_info['user_name'];
-        $this->keywords = "Web development software, documentation";
-        $this->data = $user_info;
-        $this->css = array('command_center.css');
-        $this->javascript = array('command_center.js');
-
-        $this->_render('pages/command_center');
+            $this->data['questions'] = $all_questions;
+            $this->keywords = "Web development software, documentation";
+            $this->css = array('survey.css');
+            $this->javascript = array('survey.js');
+            $this->_render('pages/survey');
+        } else {
+            redirect('home');
+        }
     }
 
-    public function logged_in($renderData = "") {
+    public function test() {
+        mkdir('tte');
+        echo base_url();
+    }
 
+    public function profile() {
+        if ($this->session->userdata('user_id')) {
+            $this->load->model('user_model');
+            $user_info = $this->user_model->get_current_user_and_projects($this->session->userdata('user_id'));
 
-        $this->title = "Sign up";
-        $this->keywords = "Web development software, documentation";
-        $this->css = array('sign_up.css');
+            $this->title = $user_info['user_name'];
+            $this->keywords = "Web development software, documentation";
+            $this->data = $user_info;
+            $this->css = array('command_center.css');
+            $this->javascript = array('command_center.js');
 
-        $this->_render('pages/logged_in', $renderData);
+            $this->_render('pages/command_center');
+        } else {
+            redirect('home');
+        }
     }
 
 }

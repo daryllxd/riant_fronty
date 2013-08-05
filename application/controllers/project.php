@@ -13,7 +13,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User extends MY_Controller {
+class Project extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -24,13 +24,16 @@ class User extends MY_Controller {
     }
 
     public function add() {
-        if (!isset($this->session->userdata('id'))) {
-            show_error('Not logged in', 302);
-        } else {
-            $project_to_add = $this->input->post();
-            $project_to_add['user_id'] = $this->session->userdata('id');
-            $this->project_model->add($project_to_add);
-        }
+        $project_to_add = $this->input->post();
+        $project_to_add['user_id'] = $this->session->userdata('user_id');
+        $this->project_model->add($project_to_add);
+                
+    }
+
+    public function delete() {
+        $project_to_delete = $this->input->post();
+        $project_to_delete['user_id'] = $this->session->userdata('user_id');
+        echo $this->project_model->delete($project_to_delete);
     }
 
 }

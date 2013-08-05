@@ -26,9 +26,10 @@ class User extends MY_Controller {
     public function add() {
         $user_id = $this->user_model->add($this->input->post());
         $this->session->set_userdata('id', $user_id);
-
-        echo $this->session->userdata('id');
-    }
+        
+        redirect(base_url('profile'));
+        
+    }    
 
 }
 

@@ -49,7 +49,7 @@
 
 // Scaffolding
 // -------------------------
-@bodyBackground:        @riant-yellow;
+@bodyBackground:        @riant-white;
 @textColor:             @riant-dark;
 
 
@@ -61,7 +61,7 @@
 
 // Typography
 // -------------------------
-@sansFontFamily:        "Open Sans", Helvetica, Arial, sans-serif;
+@sansFontFamily:        Helvetica, Arial, sans-serif;
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 
@@ -72,7 +72,7 @@
 
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    normal;    // instead of browser default, bold
-@headingsColor:         inherit; // empty to use BS default, @textColor
+@headingsColor:         @grayDarker; // empty to use BS default, @textColor
 
 
 // Component sizing
@@ -136,12 +136,12 @@
 
 // Dropdowns
 // -------------------------
-@dropdownBackground:            @white;
+@dropdownBackground:            @navbarInverseBackground;
 @dropdownBorder:                rgba(0,0,0,.2);
 @dropdownDividerTop:            #e5e5e5;
 @dropdownDividerBottom:         @white;
 
-@dropdownLinkColor:             @grayDark;
+@dropdownLinkColor:             @riant-white;
 @dropdownLinkColorHover:        @white;
 @dropdownLinkColorActive:       @white;
 
@@ -199,8 +199,8 @@
 
 @navbarHeight:                    40px;
 @navbarBackgroundHighlight:       #ffffff;
-@navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
-@navbarBorder:                    darken(@navbarBackground, 12%);
+@navbarBackground:                lighten(@navbarBackgroundHighlight, 5%);
+@navbarBorder:                    lighten(@navbarBackground, 12%);
 
 @navbarText:                      #777;
 @navbarLinkColor:                 #777;
@@ -212,9 +212,9 @@
 @navbarBrandColor:                @navbarLinkColor;
 
 // Inverted navbar
-@navbarInverseBackground:                #111111;
-@navbarInverseBackgroundHighlight:       #222222;
-@navbarInverseBorder:                    #252525;
+@navbarInverseBackground:                @grayDarker;
+@navbarInverseBackgroundHighlight:       lighten(@navbarInverseBackground, 3%);
+@navbarInverseBorder:                    darken(@navbarInverseBackground, 1%);
 
 @navbarInverseText:                      @grayLight;
 @navbarInverseLinkColor:                 @grayLight;

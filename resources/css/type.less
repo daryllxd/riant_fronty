@@ -7,8 +7,17 @@
 // -------------------------
 
 p {
-  margin: 0 0 @baseLineHeight / 2;
+  color: @grayDarker;
+  font-weight: 500;
+  line-height: 1.7em;
+  margin: 0 0 1.7em;
+  word-spacing: 0.35em;
 }
+
+p + p {
+  margin: 1.7em 0 1.7em;
+}
+
 .lead {
   margin-bottom: @baseLineHeight;
   font-size: @baseFontSize * 1.5;

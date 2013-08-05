@@ -83,7 +83,7 @@ class Database_model extends CI_Model {
         );
 
         $this->db->insert('users', $user);
-        
+
         $user = array(
             'user_name' => 'luljm',
             'user_password' => sha1('luljm'),
@@ -92,7 +92,7 @@ class Database_model extends CI_Model {
         );
 
         $this->db->insert('users', $user);
-        
+
         $user = array(
             'user_name' => 'seanamador',
             'user_password' => sha1('sean'),
@@ -101,7 +101,7 @@ class Database_model extends CI_Model {
         );
 
         $this->db->insert('users', $user);
-        
+
         $user = array(
             'user_name' => 'chengski',
             'user_password' => sha1('roselle'),
@@ -133,7 +133,8 @@ class Database_model extends CI_Model {
                 'unsigned' => TRUE,
             ),
             'project_privacy' => array(
-                'type' => 'DATE'
+                'type' => 'VARCHAR',
+                'constraint' => '32'
             ),
             'project_location' => array(
                 'type' => 'VARCHAR',
@@ -155,8 +156,36 @@ class Database_model extends CI_Model {
             REFERENCES users(user_id)
             ');
     }
-    
-    public function destroy_database() {       
+
+    public function create_and_seed_questions_table() {
+        $this->dbforge->add_field(array(
+            'question_id' => array(
+                'type' => 'INT',
+                'unsigned' => TRUE,
+                'auto_increment' => TRUE
+            ),
+            'question_text' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100'
+            ),
+            'time_created TIMESTAMP DEFAULT NOW()',
+            'time_updated' => array(
+                'type' => 'DATETIME',
+                'null' => TRUE
+            )
+        ));
+        $this->dbforge->add_key('question_id', TRUE);
+        $this->dbforge->create_table('questions');
+
+        $base_questions = array('Riant provides a familiar development environment.', 'User interface elements offer informative feedback to user actions.', 'Riant is easy to learn.', 'Riant takes a short time to update the canvas.', 'Panels and user interface components load fast.', 'Riant takes a short time to manipulate project files.', 'Downloaded project files are relatively small in size.', 'The limit set by Riant in uploading files is enough for my needs.', 'Riant did not crash.', 'Riant provides useful information about errors in my code.', 'Riant permits easy reversal or actions.', 'Unexpected bugs do not affect project files.', 'Riant responded accurately to user actions.', 'Riant looks professional and pleasing.');
+
+        foreach ($base_questions as $key) {
+            $this->db->set('question_text', $key);
+            $this->db->insert('questions');
+        }
+    }
+
+    public function destroy_database() {
         $this->dbforge->drop_database(DATABASE_NAME);
     }
 

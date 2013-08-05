@@ -20,57 +20,42 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class User_model extends MY_Model {
+class Project_model extends MY_Model {
 
     public function __construct() {
         parent::__construct();
     }
 
-    /**
-     * just one type of user
-     * @param type $user_id
-     * @return type
-     */
-    public function get_current_user_and_projects($user_id = '') {
-        $users = $this->db->select('*')->from('users')->
-                where('user_id', $user_id)->
-                get();
-        if ($users->num_rows >= 1) {
-            return __::first($users->result_array());
-        }
-    }
-
-    /**
-     * 
-     * @return array Associative array of associative arrays.
-     */
-    public function get() {
-
-        $users = $this->db->select('*')->from('users')->get();
-
-        foreach ($users->result_array() as $row) {
-            $rows[] = $row;
-        }
-
-        return $rows;
-
-    }
-
     public function add($project_to_add) {
 
         $project_to_add = array(
-            'user_name' => $project_to_add['user_name'],
-            'user_password' => sha1($project_to_add['user_password']),
-            'user_email' => $project_to_add['user_email']
+            'project_name' => $project_to_add['project_name'],
+            'project_description' => $project_to_add['project_description'],
+            'user_id' => $project_to_add['user_id'],
+            'project_privacy' => 'private'
         );
+        $this->db->insert('projects', $project_to_add);
+        if ($this->db->affected_rows() > 0) {
+            $this->create_project_directory($this->db->insert_id());
+        }
+    }
 
-        $this->db->insert('users', $project_to_add);
-
-        return $this->db->insert_id();
+    private function create_project_directory($project_id) {
+        $base_directory = UPLOAD . $project_id;
+        mkdir($base_directory);
+        mkdir($base_directory . '/css');
+        mkdir($base_directory . '/js');
+        fopen($base_directory . '/config.txt', 'w');
+        fclose($base_directory . '/config.txt');
+        fopen($base_directory . '/css/styles.css', 'w');
+        fclose($base_directory . '/css/styles.css');
+        fopen($base_directory . '/js/core.js', 'w');
+        fclose($base_directory . '/js/core.js');
     }
     
-    
-    
+    public function download_project_as_zip($project_id){
+        
+    }
 
     public function edit($user) {
         $this->db->trans_start();
@@ -89,6 +74,17 @@ class User_model extends MY_Model {
         $this->db->trans_complete();
 
         return $user['user_id'];
+    }
+
+    public function delete($project_to_delete) {
+        $project_to_delete = array(
+            'project_id' => $project_to_delete['project_id'],
+            'user_id' => $project_to_delete['user_id']
+        );
+
+        $this->db->delete('projects', $project_to_delete);
+
+        return $this->db->last_query();
     }
 
 }

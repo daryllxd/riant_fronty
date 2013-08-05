@@ -29,9 +29,7 @@
     padding-right: 15px;
 }
 
-
-
-#current-projects-header #add-project{
+#current-projects-header .add-project{
     margin-bottom: 13px;
 }
 
@@ -52,6 +50,28 @@
     margin-bottom: 5px;
 }
 
+
+.project-cell{
+    position: relative;
+}
+
+
+.project-description{
+    margin-bottom: 2px;
+}
+
+.project-options{
+    float: right;
+    margin-top: 17px;
+}
+
+.project-options a{
+    margin-right: 10px;
+}
+
+.modal input[type="text"]{
+    width: 93%;
+}
 
 
 

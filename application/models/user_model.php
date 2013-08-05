@@ -26,16 +26,25 @@ class User_model extends MY_Model {
     }
 
     /**
-     * just one type of user
-     * @param type $user_id
-     * @return type
+     * just one type of user, if user has no projects you get an array
+     * with null values, but if the user has projects you get an 
+     * array with the user's projects
+     * @param int $user_id
+     * @return array
      */
     public function get_current_user_and_projects($user_id = '') {
         $users = $this->db->select('*')->from('users')->
-                where('user_id', $user_id)->
+                join('projects', 'projects.user_id = users.user_id', 'left')->
+                where('users.user_id', $user_id)->
                 get();
         if ($users->num_rows >= 1) {
-            return __::first($users->result_array());
+            $ret['resources'] = __::rest($users->result_array());
+            $first_row = __::first($users->result_array());
+            $ret['user_name'] = $first_row['user_name'];
+            $ret['user_profile_picture'] = $first_row['user_profile_picture'];
+            $ret['user_email'] = $first_row['user_email'];
+
+            return $ret;
         }
     }
 
@@ -52,7 +61,6 @@ class User_model extends MY_Model {
         }
 
         return $rows;
-
     }
 
     public function add($user_to_add) {
