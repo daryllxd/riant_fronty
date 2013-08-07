@@ -39,15 +39,17 @@ class User_model extends MY_Model {
                 join('projects', 'projects.user_id = users.user_id', 'left')->
                 where('users.user_id', $user_id)->
                 get();
-        if ($users->num_rows >= 1) {
-            $ret['resources'] = __::rest($users->result_array());
-            $first_row = __::first($users->result_array());
-            $ret['user_name'] = $first_row['user_name'];
-            $ret['user_profile_picture'] = $first_row['user_profile_picture'];
-            $ret['user_email'] = $first_row['user_email'];
 
-            return $ret;
+        $first_row = __::first($users->result_array());
+        $user_information['user_name'] = $first_row['user_name'];
+        $user_information['user_profile_picture'] = $first_row['user_profile_picture'];
+        $user_information['user_email'] = $first_row['user_email'];
+        
+        if ($first_row['project_id'] !== NULL){
+            $user_information['resources'] = $users->result_array();
         }
+        
+        return $user_information;        
     }
 
     /**
@@ -78,50 +80,56 @@ class User_model extends MY_Model {
         return $this->db->insert_id();
     }
 
-    public function edit($user) {
+    public function edit($user_to_edit) {
         $this->db->trans_start();
 
         $updated_user = array(
-            'first_name' => $user['first_name'],
-            'last_name' => $user['last_name'],
-            'cellphone_number' => $user['cellphone_number'],
-            'school_id' => $user['school_id'],
-            'email_address' => $user['email_address']
+            'user_profession' => $user_to_edit['profession'],
+            'user_years_experience' => $user_to_edit['years_experience'],
+            'user_tools_used' => $user_to_edit['tools_used'],
+            'user_has_finished_survey' => TRUE
         );
 
-        $this->db->where('user_id', $user['user_id']);
+        $this->db->where('user_id', $user_to_edit['user_id']);
 
         $this->db->update('users', $updated_user);
         $this->db->trans_complete();
 
-        return $user['user_id'];
+        return $user_to_edit['user_id'];
     }
 
-    public function submit_survey($user) {
+    /**
+     * Not sure if I should move this to a question_model or what
+     * @param array $survey_answers
+     * @return type
+     */
+    public function submit_survey($survey_answers) {
+        $this->db->trans_start();
+
+        $this->edit($survey_answers['user_information']);
+
         $to_insert = array();
-        
-        $user['question_answers'] = __::rest($user['question_answers']);
 
-        
+//        fix this because it isn't sanitized enough'
+        $survey_answers['question_answers'] = __::rest($survey_answers['question_answers']);
 
-        foreach ($user['question_answers'] as $key => $value) {
+        foreach ($survey_answers['question_answers'] as $key => $value) {
             $to_insert[] = array(
-                'user_id' => $user['user_id'],
+                'user_id' => $survey_answers['user_information']['user_id'],
                 'question_id' => $key + 1,
                 'question_answer' => $value
             );
         }
 
-
-        $this->db->trans_start();
-        
         $this->db->insert_batch('users_questions', $to_insert);
 
 
         $this->db->trans_complete();
-        
+
         return $this->db->last_query();
     }
+    
+    
 
 }
 

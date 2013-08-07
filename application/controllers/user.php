@@ -30,29 +30,22 @@ class User extends MY_Controller {
         redirect(base_url('profile'));
     }
 
+    /**
+     * input must be in this format: 
+     */
     public function submit_survey() {
+
         if ($this->session->userdata('user_id')) {
             $input = $this->input->post();
-            
-            $to_pass['user_id'] = $this->session->userdata('user_id');
+
+            $to_pass['user_information'] = $input['user_information'];
+            $to_pass['user_information']['user_id'] = $this->session->userdata('user_id');
+
             $to_pass['question_answers'] = $input['question_answers'];
-            
 
             echo $this->user_model->submit_survey($to_pass);
+            $this->session->set_userdata('user_has_finished_survey', TRUE);
             
-            
-//            echo var_dump($this->input->post());
-
-
-//            $this->load->model('question_model');
-//            $all_questions = $this->question_model->get();
-//            $this->title = 'Post-test survey';
-//
-//            $this->data['questions'] = $all_questions;
-//            $this->keywords = "Web development software, documentation";
-//            $this->css = array('survey.css');
-//            $this->javascript = array('survey.js');
-//            $this->_render('pages/survey');
         } else {
             redirect('home');
         }

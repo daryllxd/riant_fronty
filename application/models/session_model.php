@@ -19,8 +19,6 @@ class Session_model extends MY_Model {
         parent::__construct();
     }
 
-    
-
     /**
      * @depends __ library
      * @param array $user_to_log_in['user_name', 'user_email', 'user_password']

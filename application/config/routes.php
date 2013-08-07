@@ -44,6 +44,7 @@ if (!defined('BASEPATH'))
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 
+//Home = all pages
 $route['docu'] = 'home/docu';
 $route['profile'] = 'home/profile';
 $route['sign_up'] = 'home/sign_up';
@@ -52,11 +53,12 @@ $route['survey'] = 'home/survey';
 $route['new_project'] = 'project/add';
 $route['edit_project'] = 'project/edit';
 $route['delete_project'] = 'project/delete';
+$route['download_project/(:num)'] = 'project/download/$1';
 
 $route['login'] = 'session/login';
 $route['logout'] = 'session/logout';
 
-$route['test'] = 'home/test';
+$route['test'] = 'test/index';
 
 $route['new_user'] = 'user/add';
 $route['submit_survey'] = 'user/submit_survey';

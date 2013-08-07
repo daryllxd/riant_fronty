@@ -2,47 +2,63 @@ var survey = {
     init: function(){
         $('.tooltipper').tooltip();
         
-        $('#submit-survey').on('click', function(){
-            survey.submit_survey()
-        });
+        $('#form-survey input, #myform form-survey').not([type="submit"]).addClass('required');
         
+        $('#submit-survey').on('click', function(){            
+            if (survey.helper.is_valid_survey()){                
+                survey.prepare_survey()
+            }else{
+                $('#submit-survey').shake();
+            }
+            
+        });
+    },
+    prepare_survey: function(){      
+        var survey_answers = {
+            user_information:{
+                years_experience: $('input[name=survey-years-experience]').val(),
+                profession: $('input[name=survey-profession]:checked').val(),
+                tools_used: survey.helper.fix_text_box(($('input[name=survey-tools-used]:checked')))   
+            },
+            question_answers: []
+        };
+        
+        //        For some reason I am also passing element 0 wth  
+        var counter = $('td[class^=question]').length;
+        for (var i = 1; i <= counter; i++){
+            survey_answers['question_answers'][i] = $('input[name=survey-question-'+ i +']:checked').val();
+        }
+        
+        survey.ajax_submit_survey(survey_answers);        
         
     },
-    submit_survey: function(){
-        //        For some reason I am also passing element 0 wth
-        var counter = $('td[class^=question]').length;
-        var to_pass = [];
-        
-        to_pass['user_information']['years_experience'] = $('input[name=survey-years-experience]').val();
-        to_pass['user_information']['profession'] = $('input[name=survey-profession]:checked').val();
-        to_pass['user_information']['tools_used'] = [];
-        
-        
-        $.each(($('input[name=survey-tools-used]:checked')),
-            function(){
-                to_pass['tools_used'].push($(this).val());
-            });
-            
-        to_pass['tools_used'] = to_pass['tools_used'].join();            
-        
-        for (var i = 1; i <= counter; i++){
-            to_pass['question_answers'][i] = $('input[name=survey-question-'+ i +']:checked').val();
-        }        
+    ajax_submit_survey: function(data_to_be_submitted){
         $.post(riant.host + 'submit_survey', {
-            user_information: to_pass['user_information'],
-            question_answers: to_pass['question_answers']
+            user_information: data_to_be_submitted['user_information'],
+            question_answers: data_to_be_submitted['question_answers']
             
-        }, function(data){
-            console.log(data);
-            alert(data);
+        }, function(){
+            setTimeout(function() {
+                window.location.href = riant.host;
+            }, 1000);
         });
-        
     }
-    
 }
 
+survey.helper = {
+    is_valid_survey: function(){
+        return $('#form-survey').valid();  
+    },
+    fix_text_box : function(group_of_text_boxes){
+        var ret = [];
+        $.each((group_of_text_boxes),
+            function(){
+                ret.push($(this).val());
+            });            
+        return ret.join();
+    }
 
-
+}
 
 
 $(document).ready(survey.init());

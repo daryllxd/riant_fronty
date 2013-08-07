@@ -1,14 +1,5 @@
-jQuery.fn.fadeOutAndRemove = function(speed){
-    $(this).fadeOut(speed,function(){
-        $(this).remove();
-    })
-}
-
 var cc = {
-    host: 'http://localhost/',
     init: function(){
-               
-        
         $('.add-project').on('click', function(){
             $('#modal-create-project').modal('show');
         })
@@ -18,16 +9,12 @@ var cc = {
             new_project['project_name'] = $('#create-project-name').val();
             new_project['project_description'] = $('#create-project-description').val();
             cc.create_project(new_project);
-        })
+        });        
         
-        $('[class^="delete-project-"]').on('click', function(){
+        $('.delete-project').on('click', function(){
             var project_id = $(this).attr('data-project-id');
             var project_name = $(this).attr('data-project-name');
-            
-            
             cc.show_modal_for_delete(project_id, project_name);
-            
-            
             
         //            if (cc.delete_project(project_id)){
         //                $('#project-cell-' + project_id).fadeOutAndRemove('fast');
@@ -38,11 +25,9 @@ var cc = {
         
     },
     create_project: function(new_project){
-        $.post(cc.host + 'riant_fronty/new_project',{                
+        $.post(riant.host + 'new_project',{                
             project_name: new_project['project_name'],
-            project_description: new_project['project_description'] 
-            
-            
+            project_description: new_project['project_description']            
         }, function (data) {
             //            Create new div at the bottom and append shit there
             $('#modal-create-project').modal("hide");
@@ -56,7 +41,7 @@ var cc = {
         return true;
     },
     delete_project :function(project_id){
-        $.post(cc.host + 'riant_fronty/delete_project',{
+        $.post(riant.host + 'delete_project',{
             project_id: project_id
         }, function (data) {
             //            return true;
@@ -73,6 +58,8 @@ var cc = {
                 $('#delete-project-name').val('');
                 $('#modal-delete-project').modal('hide');                
                 cc.bootstrap_alert('<strong>'+ project_name + ' has been deleted.</strong>');
+            }else{
+                $('#delete-project-button').shake();
             }
         });
     },    

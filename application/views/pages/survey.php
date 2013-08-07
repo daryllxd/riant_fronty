@@ -7,7 +7,7 @@
 
 
 
-            <form action="<?php echo base_url('submit_survey'); ?>" method="post" class="form-inline">
+            <form action="<?php echo base_url('submit_survey'); ?>" method="post" id="form-survey" class="form-inline">
 
                 <table class="table">
                     <tr>
@@ -39,7 +39,7 @@
                         <td class="choices">
 
                             <div class="input-append">
-                                <input name="survey-years-experience" id="appendedInput" class="inline" type="number" value="1">
+                                <input name="survey-years-experience" id="appendedInput" class="inline" type="number">
                                 <span class="add-on">years</span>
                             </div>
                         </td>
@@ -50,7 +50,7 @@
                         <td class="choices">
 
                             <label class="checkbox inline">
-                                <input type="checkbox" name="survey-tools-used" id="optionsRadios1" value="text editor" checked>
+                                <input type="checkbox" name="survey-tools-used" id="optionsRadios1" value="text editor">
                                 <a class="tooltipper" data-toggle="tooltip" title="Notepad++, Sublime Text, Vim, Emacs">Text Editors</a>
                             </label>
                             <label class="checkbox inline">
@@ -77,35 +77,24 @@
                     foreach ($questions as $resource) {
                         ?>
                         <tr>
-                            <td>
-                                <?php echo $resource['question_text']; ?>
-                            </td>
+                            <td><?php echo $resource['question_text']; ?></td>
                             <td class="question choices">
                                 <label class="radio inline">
-                                    <input type="radio" name="survey-question-<?php echo $resource['question_id']; ?>" value="1" checked>
-                                    Yes
-                                </label>
+                                    <input type="radio" name="survey-question-<?php echo $resource['question_id']; ?>">Yes</label>
                                 <label class="radio inline">
-                                    <input type="radio" name="survey-question-<?php echo $resource['question_id']; ?>" value="0">No
-                                </label>
+                                    <input type="radio" name="survey-question-<?php echo $resource['question_id']; ?>" value="0">No</label>
                             </td>
                         </tr>
                         <?php
                     }
                     ?>
-
-
-                </table>                
-
+                </table>
                 <div class="control-group">
                     <div class="controls">
-                        <a <?php // echo base_url('submit_survey'); ?>" id="submit-survey" class="btn">Submit</a>
+                        <a id="submit-survey" class="btn">Submit</a>
                     </div>
                 </div>
             </form>
-
-
-            <!--<a class="btn btn-orange"><h2>Sign up for free</h2></a>-->
         </div>
     </div>
 </section>

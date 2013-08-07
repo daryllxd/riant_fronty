@@ -25,6 +25,7 @@ class Session extends MY_Controller {
 //            login to command center
             $this->session->set_userdata('user_id', $authentication_info['user_id']);
             $this->session->set_userdata('user_name', $authentication_info['user_name']);
+            $this->session->set_userdata('user_has_finished_survey', $authentication_info['user_has_finished_survey']);
 
             redirect(base_url('profile'));
         } else {

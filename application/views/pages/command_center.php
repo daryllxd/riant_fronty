@@ -19,7 +19,7 @@
             <table id="current-projects-body" class="table table-hover">                   
                 <tbody>
 
-                    <?php if (count($resources) <= 0) { ?>
+                    <?php if (!isset($resources)) { ?>
                         <tr>
                             <td>
                                 <h3 id="create-new-project-text" class="add-project">
@@ -42,8 +42,8 @@
                                 <td>
                                     <div class="project-options">
                                         <a href="#modal-create-project" class="btn edit-project-<?php echo $resource['project_id'] ?>" >Edit</a>
-                                        <a href="#modal-create-project" class="btn download-project-<?php echo $resource['project_id'] ?>" >Download</a>
-                                        <a class="delete-project-<?php echo $resource['project_id'] ?> btn" data-project-name="<?php echo $resource['project_name'] ?>" data-project-id="<?php echo $resource['project_id'] ?>">Delete</a>
+                                        <a href="<?php echo base_url('download_project/'. $resource['project_id']); ?>" class="download-project btn" data-project-id="<?php echo $resource['project_id'] ?>" >Download</a>
+                                        <a class="delete-project btn" data-project-name="<?php echo $resource['project_name'] ?>" data-project-id="<?php echo $resource['project_id'] ?>">Delete</a>
                                     </div>
                                 </td>
                             </tr>

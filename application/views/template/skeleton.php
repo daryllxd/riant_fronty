@@ -49,9 +49,7 @@
         </script>
         <script>window.jQuery || document.write('<script src="<?php echo base_url(JS . "libs/jquery-1.9.1.min.js"); ?>"><\/script>')</script>
         <script src="<?php echo base_url(JS . "libs/underscore-min-1.4.4.js"); ?>"></script>
-        <script src="<?php echo base_url(JS . "plugins.js"); ?>"></script>
-        <script src="<?php echo base_url(JS . "script.js"); ?>"></script>
-        
+        <script src="<?php echo base_url(JS . "plugins.js"); ?>"></script>        
         <script src="<?php echo base_url(JS . BASE_JS); ?>"></script>
         <!-- extra js-->
         <?php foreach ($javascript as $js): ?>

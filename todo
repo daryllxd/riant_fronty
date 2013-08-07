@@ -4,7 +4,11 @@ todo
 Created by: Daryll Santos
 
 delete project modal css is in percentage, not in absolute terms
-survey not aligned yung mga elemetns
+survey not aligned yung mga elemetns, naka absolute pa
+rename zip folder and fix config.txt
+add security for downloading a project, must own the project before you download it
+no append aftter creating file because you will visit the riant app naman talaga eh.
+need to handle if upload directory does not exist?
 
 
 /* End of file todo */

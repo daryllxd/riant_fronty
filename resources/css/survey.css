@@ -38,3 +38,11 @@ tr{
     margin-bottom: 0.2em;
 }
 
+label.error{
+    color: red;
+    position: absolute;
+    right: 4em;
+    
+    
+}
+

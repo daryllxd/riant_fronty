@@ -6,20 +6,20 @@ if (!defined('BASEPATH'))
 class Home extends MY_Controller {
 
     public function index($renderData = "") {
+        if ($this->session->userdata('user_id')) {
+            redirect('profile');
+        } else {
+            $this->title = "Yaaaaa";
+            $this->keywords = "arny, arnodo";
+            $this->css = array('home.css');
 
-        /*
-         * set up title and keywords (if not the default in custom.php config file will be set) 
-         */
-        $this->title = "Yaaaaa";
-        $this->keywords = "arny, arnodo";
-        $this->css = array('home.css');
+            // 1. when you pass AJAX to renderData it will generate only that particular PAGE skipping other parts like header, nav bar,etc.,
+            //      this can be used for AJAX Responses
+            // 2. when you pass JSON , then the response will be json object of $this->data.  This can be used for JSON Responses to AJAX Calls.
+            // 3. By default full page will be rendered
 
-        // 1. when you pass AJAX to renderData it will generate only that particular PAGE skipping other parts like header, nav bar,etc.,
-        //      this can be used for AJAX Responses
-        // 2. when you pass JSON , then the response will be json object of $this->data.  This can be used for JSON Responses to AJAX Calls.
-        // 3. By default full page will be rendered
-
-        $this->_render('pages/home', $renderData);
+            $this->_render('pages/home', $renderData);
+        }
     }
 
     public function docu($renderData = "") {
@@ -41,7 +41,8 @@ class Home extends MY_Controller {
     }
 
     public function survey() {
-        if ($this->session->userdata('user_id')) {
+        if ($this->session->userdata('user_id') &&
+                !$this->session->userdata('user_has_finished_survey')) {
             $this->load->model('question_model');
             $all_questions = $this->question_model->get();
             $this->title = 'Post-test survey';
@@ -49,18 +50,11 @@ class Home extends MY_Controller {
             $this->data['questions'] = $all_questions;
             $this->keywords = "Web development software, documentation";
             $this->css = array('survey.css');
-            $this->javascript = array('survey.js');
+            $this->javascript = array('libs/jquery.validate.min.js', 'survey.js');
             $this->_render('pages/survey');
         } else {
             redirect('home');
         }
-    }
-    
-    
-
-    public function test() {
-        mkdir('tte');
-        echo base_url();
     }
 
     public function profile() {
@@ -73,7 +67,6 @@ class Home extends MY_Controller {
             $this->data = $user_info;
             $this->css = array('command_center.css');
             $this->javascript = array('command_center.js');
-
             $this->_render('pages/command_center');
         } else {
             redirect('home');

@@ -40,40 +40,25 @@ class Project_model extends MY_Model {
         }
     }
 
-    private function create_project_directory($project_id) {
-        $base_directory = UPLOAD . $project_id;
-        mkdir($base_directory);
-        mkdir($base_directory . '/css');
-        mkdir($base_directory . '/js');
-        fopen($base_directory . '/config.txt', 'w');
-        fclose($base_directory . '/config.txt');
-        fopen($base_directory . '/css/styles.css', 'w');
-        fclose($base_directory . '/css/styles.css');
-        fopen($base_directory . '/js/core.js', 'w');
-        fclose($base_directory . '/js/core.js');
-    }
-    
-    public function download_project_as_zip($project_id){
-        
+    /**
+     * @link http://ellislab.com/codeigniter/user-guide/libraries/zip.html
+     * @param type $project_id
+     * @return boolean returns status if valid or not
+     */
+    public function download_project_as_zip($project_id) {
+        $base_directory = UPLOAD . $project_id . '/';
+        if (file_exists($base_directory) && is_dir($base_directory)) {
+            $this->load->library('zip');
+            $this->zip->read_dir($base_directory, FALSE);
+            $this->zip->download('my_backup.zip');
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function edit($user) {
-        $this->db->trans_start();
-
-        $updated_user = array(
-            'first_name' => $user['first_name'],
-            'last_name' => $user['last_name'],
-            'cellphone_number' => $user['cellphone_number'],
-            'school_id' => $user['school_id'],
-            'email_address' => $user['email_address']
-        );
-
-        $this->db->where('user_id', $user['user_id']);
-
-        $this->db->update('users', $updated_user);
-        $this->db->trans_complete();
-
-        return $user['user_id'];
+        // ????
     }
 
     public function delete($project_to_delete) {
@@ -85,6 +70,19 @@ class Project_model extends MY_Model {
         $this->db->delete('projects', $project_to_delete);
 
         return $this->db->last_query();
+    }
+
+    private function create_project_directory($project_id) {
+        $base_directory = UPLOAD . $project_id;
+        mkdir($base_directory);
+        mkdir($base_directory . '/css');
+        mkdir($base_directory . '/js');
+        fopen($base_directory . '/config.txt', 'w');
+        fclose($base_directory . '/config.txt');
+        fopen($base_directory . '/css/styles.css', 'w');
+        fclose($base_directory . '/css/styles.css');
+        fopen($base_directory . '/js/core.js', 'w');
+        fclose($base_directory . '/js/core.js');
     }
 
 }
