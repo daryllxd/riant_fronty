@@ -72,17 +72,18 @@ class Project_model extends MY_Model {
         return $this->db->last_query();
     }
 
-    private function create_project_directory($project_id) {
-        $base_directory = UPLOAD . $project_id;
+    public function create_project_directory($project_id) {
+        $base_directory = base_url() .  UPLOAD . $project_id;   
+        echo $base_directory;
         mkdir($base_directory);
-        mkdir($base_directory . '/css');
-        mkdir($base_directory . '/js');
-        fopen($base_directory . '/config.txt', 'w');
-        fclose($base_directory . '/config.txt');
-        fopen($base_directory . '/css/styles.css', 'w');
-        fclose($base_directory . '/css/styles.css');
-        fopen($base_directory . '/js/core.js', 'w');
-        fclose($base_directory . '/js/core.js');
+        mkdir($base_directory . 'css');
+        mkdir($base_directory . 'js');
+//        fopen($base_directory . '/config.txt', 'w');
+//        fclose($base_directory . '/config.txt');
+//        fopen($base_directory . '/css/styles.css', 'w');
+//        fclose($base_directory . '/css/styles.css');
+//        fopen($base_directory . '/js/core.js', 'w');
+//        fclose($base_directory . '/js/core.js');
     }
 
 }

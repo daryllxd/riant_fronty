@@ -22,11 +22,21 @@ class Test extends CI_Controller {
     public function index() {
         $this->load->model('project_model');
         
+        echo `whoami`;
+        
+        mkdir('http://localhost/riant_fronty/aw', 0777);
+        
+         if (!mkdir(base_url('huh'), 0777, true)) {//0777
+//        die('Failed to create folders...');
+    }
+        
+        echo base_url('huh');
+        mkdir(base_url('huh'), 0777);
         
         
-        echo var_dump($this->project_model->download_project_as_zip(3));
         
-        echo 'ta';
+        $this->project_model->create_project_directory(3);
+        
         
     }
 

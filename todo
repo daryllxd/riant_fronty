@@ -9,6 +9,7 @@ rename zip folder and fix config.txt
 add security for downloading a project, must own the project before you download it
 no append aftter creating file because you will visit the riant app naman talaga eh.
 need to handle if upload directory does not exist?
+cannot create directory and file sa mac. failed to open stream: HTTP wrapper does not support writeable connections
 
 
 /* End of file todo */
